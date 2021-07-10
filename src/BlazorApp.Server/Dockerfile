@@ -6,10 +6,10 @@ EXPOSE 8090
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["BlazorApp.Server/BlazorApp.Server.csproj", "BlazorApp.Server/"]
-RUN dotnet restore "BlazorApp.Server/BlazorApp.Server.csproj"
+COPY ["src/BlazorApp.Server/BlazorApp.Server.csproj", "src/BlazorApp.Server/"]
+RUN dotnet restore "src/BlazorApp.Server/BlazorApp.Server.csproj"
 COPY . .
-WORKDIR "/src/BlazorApp.Server"
+WORKDIR "/src/src/BlazorApp.Server"
 RUN dotnet build "BlazorApp.Server.csproj" -c Release -o /app/build
 
 FROM build AS publish
