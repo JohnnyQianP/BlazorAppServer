@@ -2,21 +2,21 @@
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8090
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["BlazorAppTe/BlazorAppTe.csproj", "BlazorAppTe/"]
-RUN dotnet restore "BlazorAppTe/BlazorAppTe.csproj"
+COPY ["BlazorApp.Server/BlazorApp.Server.csproj", "BlazorApp.Server/"]
+RUN dotnet restore "BlazorApp.Server/BlazorApp.Server.csproj"
 COPY . .
-WORKDIR "/src/BlazorAppTe"
-RUN dotnet build "BlazorAppTe.csproj" -c Release -o /app/build
+WORKDIR "/src/BlazorApp.Server"
+RUN dotnet build "BlazorApp.Server.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "BlazorAppTe.csproj" -c Release -o /app/publish
+RUN dotnet publish "BlazorApp.Server.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "BlazorAppTe.dll"]
+ENV ASPNETCORE_URLS=http://+:8090
+ENTRYPOINT ["dotnet", "BlazorApp.Server.dll","--server.urls","http://*:8090"]
