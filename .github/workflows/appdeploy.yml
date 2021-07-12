@@ -29,7 +29,7 @@ jobs:
     - name: Get version
       id: get_version
       run: |
-        time=$(date)
+        time=$(date.timespan)
         echo $time
         VERSION=${{ github.event.inputs.Version }}
         [ "$VERSION" == "" ] && VERSION=release
