@@ -36,6 +36,7 @@ jobs:
       run: |
         docker tag blazorappserverimage $DOCKER_REG:${{ steps.get_version.outputs.version }}
         docker push $DOCKER_REG:${{ steps.get_version.outputs.version }}
+        docker image rm blazorappserverimage
   deploy:
     runs-on: ubuntu-20.04
     needs: build
@@ -54,4 +55,3 @@ jobs:
           if [ $(docker ps -a | grep -c $CONTAINER_NAME) -gt 0 ]; then docker stop $CONTAINER_NAME;docker rm $CONTAINER_NAME;fi
           echo "${{ secrets.PASSWORD }}" | docker login $REG --username "${{ secrets.USERNAME }}" --password-stdin
           docker run --name $CONTAINER_NAME -d -p 8090:8090 $DOCKER_REG:${{ needs.build.outputs.version }}
-          docker image rm $DOCKER_REG:${{ needs.build.outputs.version }}
