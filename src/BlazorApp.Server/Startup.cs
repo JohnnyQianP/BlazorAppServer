@@ -38,6 +38,9 @@ namespace BlazorApp.Server
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //转发二级
+            app.UseForwardedHeaders();
+            app.UsePathBase("/blazorserver");
             app.UseResponseCompression();
             if (env.IsDevelopment())
             {
@@ -49,7 +52,6 @@ namespace BlazorApp.Server
             }
 
             app.UseStaticFiles();
-
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
