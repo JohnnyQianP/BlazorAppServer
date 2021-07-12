@@ -1,4 +1,4 @@
-name: createimage
+name: createblazorserver
 env:
   DOCKER_REG: registry.cn-shanghai.aliyuncs.com/gen_dockerimage/blazorappserver
   REG: registry.cn-shanghai.aliyuncs.com
@@ -29,14 +29,15 @@ jobs:
     - name: Get version
       id: get_version
       run: |
+        time=$(date '+%Y%m%d%H%M%S')
+        echo $time
         VERSION=${{ github.event.inputs.Version }}
-        [ "$VERSION" == "" ] && VERSION=release
+        [ "$VERSION" == "" ] && VERSION="$time"
         echo ::set-output name=VERSION::"$VERSION"
     - name: push image
       run: |
         docker tag blazorappserverimage $DOCKER_REG:${{ steps.get_version.outputs.version }}
         docker push $DOCKER_REG:${{ steps.get_version.outputs.version }}
-        docker image rm blazorappserverimage
   deploy:
     runs-on: ubuntu-20.04
     needs: build
