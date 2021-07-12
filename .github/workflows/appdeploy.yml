@@ -32,7 +32,7 @@ jobs:
         time=$(date '+%Y%m%d%H%M%S')
         echo $time
         VERSION=${{ github.event.inputs.Version }}
-        [ "$VERSION" == "" ] && VERSION=release
+        [ "$VERSION" == "" ] && VERSION="$time"
         echo ::set-output name=VERSION::"$VERSION"
     - name: push image
       run: |
