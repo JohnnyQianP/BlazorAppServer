@@ -50,9 +50,9 @@ namespace BlazorApp.Server
             {
                 app.UseExceptionHandler("/Error");
             }
-
-            app.UseStaticFiles();
             app.UseStaticFiles("/blazorserver");
+            app.UseStaticFiles();
+            
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
