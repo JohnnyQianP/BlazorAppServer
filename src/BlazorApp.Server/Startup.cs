@@ -48,8 +48,7 @@ namespace BlazorApp.Server
             }
             else
             {
-                app.UseDeveloperExceptionPage();
-                //app.UseExceptionHandler("/Error");
+                app.UseExceptionHandler("/Error");
             }
             app.UseStaticFiles();
             
@@ -58,7 +57,7 @@ namespace BlazorApp.Server
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub();
-                endpoints.MapHub<ChatHub>("blazorserver/chathub");
+                endpoints.MapHub<ChatHub>("/chathub");
                 endpoints.MapFallbackToPage("/_Host");
             });
         }
