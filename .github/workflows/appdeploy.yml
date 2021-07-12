@@ -25,7 +25,7 @@ jobs:
         echo "${{ secrets.PASSWORD }}" | docker login $REG --username "${{ secrets.USERNAME }}" --password-stdin
     - name: Build the Docker image
       run:
-        docker build . --file src/BlazorApp.Server/Dockerfile --tag blazorappserverimage
+        docker build . --file src/BlazorApp.Server/Dockerfile --no-cache --tag blazorappserverimage
     - name: Get version
       id: get_version
       run: |
