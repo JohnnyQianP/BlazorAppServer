@@ -1,4 +1,4 @@
-name: createimage
+name: createblazorserver
 env:
   DOCKER_REG: registry.cn-shanghai.aliyuncs.com/gen_dockerimage/blazorappserver
   REG: registry.cn-shanghai.aliyuncs.com
@@ -29,7 +29,7 @@ jobs:
     - name: Get version
       id: get_version
       run: |
-        time=$(date '%Y%m%d%T%H%M%S')
+        time=$(date '%Y%m%d%T')
         echo $time
         VERSION=${{ github.event.inputs.Version }}
         [ "$VERSION" == "" ] && VERSION=release
