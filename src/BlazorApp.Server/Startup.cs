@@ -48,7 +48,8 @@ namespace BlazorApp.Server
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                app.UseDeveloperExceptionPage();
+                //app.UseExceptionHandler("/Error");
             }
             app.UseStaticFiles();
             
