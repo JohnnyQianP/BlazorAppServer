@@ -40,7 +40,7 @@ namespace BlazorApp.Server
         {
             //转发二级
             app.UseForwardedHeaders();
-            app.UsePathBase("/blazorserver");
+            //app.UsePathBase("/blazorserver");
             app.UseResponseCompression();
             if (env.IsDevelopment())
             {
@@ -50,7 +50,6 @@ namespace BlazorApp.Server
             {
                 app.UseExceptionHandler("/Error");
             }
-            app.UseStaticFiles("/blazorserver");
             app.UseStaticFiles();
             
             app.UseRouting();
