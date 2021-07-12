@@ -58,7 +58,7 @@ namespace BlazorApp.Server
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub();
-                endpoints.MapHub<ChatHub>("/blazorserver/chathub");
+                endpoints.MapHub<ChatHub>("/blazorserver/blazorserver/chathub");
                 endpoints.MapFallbackToPage("/_Host");
             });
         }
